@@ -59,11 +59,11 @@ header a:hover{
     font-weight:bold;
 }
 
-/* Showcase */
+
 #showcase{
-    min-height:400px;
-    background:url('../img/Pina.jpg')no-repeat 0 -500px;
-    text-align: center;
+    min-height: 400px;
+    background: url("../images/showcase.jpg");
+    text-align:center;
     color:#ffffff;
 }
 
@@ -76,3 +76,12 @@ header a:hover{
 #showcase p{
     font-size: 20px;
 }
+
+#newsletter{
+    padding:15px;
+    color:#ffffff;
+    background:#ffe926
+    }
+
+
+  
