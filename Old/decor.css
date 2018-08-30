@@ -62,7 +62,7 @@ header a:hover{
 /* Showcase */
 #showcase{
     min-height:400px;
-    background:url('../img/Pina.jpg')no-repeat 0 -500px;
+    background:url('../img/Pina.jpg')no-repeat;
     text-align: center;
     color:#ffffff;
 }
