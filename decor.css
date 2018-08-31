@@ -59,11 +59,12 @@ header a:hover{
     font-weight:bold;
 }
 
-
+/* Showcase */
 #showcase{
-    min-height: 400px;
-    background: url("../images/showcase.jpg");
-    text-align:center;
+    min-height:400px;
+    background:url('../img/Pina.jpg')no-repeat 0 -500px;
+    background-size:cover;
+    text-align: center;
     color:#ffffff;
 }
 
@@ -79,9 +80,34 @@ header a:hover{
 
 #newsletter{
     padding:15px;
-    color:#ffffff;
-    background:#ffe926
-    }
+    background:#13af15;
+    border-bottom: #ffffff 7px solid;
+    border-top: #ffffff 7px solid;
+}
 
+/* Boxes */
+#boxes{
+    margin-top:20px;
+}
+
+#boxes .box{
+    float:left;
+    width:30%;
+    padding:10px;
+    text-align:center;
+}
+
+#boxes .box img{
+    width:90px;
+}
+
+footer{
+    padding:20px;
+    margin-top:20px;
+    color:#ffffff;
+    background-color:#13af15;
+    text-align:center;
+    border-top: #ffffff 7px solid;
+}
 
   
