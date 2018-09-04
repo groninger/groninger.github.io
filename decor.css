@@ -25,7 +25,7 @@ ul{
     color: #ffffff;
     margin-top:10px;
     margin-bottom:10px;
-    border:#fff solid 3px;
+    border:#ffffff solid 3px;
 }
 
 
@@ -42,7 +42,7 @@ header{
 header a{
     color:#ffffff;
     text-decoration: none;
-    text transform: uppercase;
+    text transform:uppercase;
     font-size:16px;
 }
     
@@ -72,8 +72,8 @@ header a:hover{
 
 /* Showcase */
 #showcase{
-    min-height:400px;
-    background:url('../img/Pina.jpg')no-repeat 0 +100px;
+    min-height:250px;
+    background:url('../img/Pina.jpg')no-repeat;
     background-size:cover;
     text-align: center;
     color:#ffffff;
@@ -90,9 +90,11 @@ header a:hover{
 }
 
 #newsletter{
-    padding:5px;
+    padding:7px;
     background:#13af15;
     color:#ffffff;
+    border-top:#ffffff solid 3px;
+    border-bottom:#ffffff solid 3px;
 }
 
 /* Boxes */
@@ -108,36 +110,37 @@ header a:hover{
 }
 
 #boxes .box img{
-    width:30px;
+    width:50%;
     border:#13af15 solid 3px;
-    
 }
 
 /* Sidebar */
 aside#sidebar{
-    float:right; 
-    width: 30%;
-    margin-top: 10px;
+    float:right;
+    width:30%;
+    margin-top:10px;
 }
 
+
+
 aside#sidebar .quote input, aside#sidebar .quote textarea{
-    width:90%;
-    padding:5px;
+  width:90%;
+  padding:5px;
 }
-    
+
 /* Main-col */
 article#main-col{
-    float: left;
-    width: 65%;
+  float:left;
+  width:65%;
 }
 
 /* Services */
 ul#services li{
-    list-style:none;
-    padding:20px;
-    border:#13af15 solid 3px;
-    margin-bottom:5px;
-    background:#ffffff;
+  list-style: none;
+  padding:20px;
+  border: #13af15 solid 3px;
+  margin-bottom:5px;
+  background:#ffffff;
 }
 
 
@@ -150,27 +153,27 @@ footer{
     border-top: #ffffff 7px solid;
 }
 
-/*Media Queries */
-@media(max-width:768px){
-   header #branding,
-   header nav,
-   header nav li,
-   #newsletter h1,
-   #newsletter form,
-   #boxes .box{
-       float:none;
-       test-align:center;
-       width:100%;
-   }
-   header{
-       padding-bottom:20px;
-   }
-   
-   #showcase h1{
-       margin-top:40px;
-   }
-   
-   #
-   
+/* Media Queries */
+@media(max-width: 768px){
+  header #branding,
+  header nav,
+  header nav li,
+  #newsletter h1,
+  #newsletter form,
+  #boxes .box,
+  article#main-col,
+  aside#sidebar{
+    float:none;
+    text-align:center;
+    width:100%;
+  }
+
+  header{
+    padding-bottom:20px;
+  }
+
+  #showcase h1{
+    margin-top:40px;
+  }
 }
-  
+
