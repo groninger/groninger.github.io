@@ -18,14 +18,25 @@ ul{
     margin:0;
     padding:0;
     }
-    
+
+.dark{
+    padding:15px;
+    background:#13af15;
+    color: #ffffff;
+    margin-top:10px;
+    margin-bottom:10px;
+    border: #ffffff 3px solid;
+}
+
+
+
 /* Header **/
 header{
     background:#13af15;
     color:#ffffff;
     padding-top: 30px;
     min-height: 70px;
-    border-bottom: #ffffff 7px solid;
+    border-bottom: #ffffff 5px solid;
 }
 
 header a{
@@ -62,7 +73,7 @@ header a:hover{
 /* Showcase */
 #showcase{
     min-height:400px;
-    background:url('../img/Pina.jpg')no-repeat 0 -500px;
+    background:url('../img/Pina.jpg')no-repeat 0 -100px;
     background-size:cover;
     text-align: center;
     color:#ffffff;
@@ -79,10 +90,9 @@ header a:hover{
 }
 
 #newsletter{
-    padding:15px;
+    padding:5px;
     background:#13af15;
-    border-bottom: #ffffff 7px solid;
-    border-top: #ffffff 7px solid;
+    color:#ffffff;
 }
 
 /* Boxes */
@@ -101,13 +111,38 @@ header a:hover{
     width:90px;
 }
 
+/* Sidebar */
+aside#sidebar{
+    float:right; 
+    width: 30%;
+    
+}
+
+/* Main-col */
+article#main-col{
+    float: left;
+    width: 65%;
+}
+
+/* Services */
+ul#services li{
+    list-style:none;
+    padding:20=\px;
+    border:#13af15 solid 3px;
+    margin-bottom:5px;
+    background:#ffffff;
+}
+
+
+
 footer{
     padding:20px;
     margin-top:20px;
     color:#ffffff;
     background-color:#13af15;
     text-align:center;
-    border-top: #ffffff 7px solid;
+    border: #ffffff 7px solid;
+    
 }
 
   
