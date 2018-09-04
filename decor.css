@@ -25,7 +25,7 @@ ul{
     color: #ffffff;
     margin-top:10px;
     margin-bottom:10px;
-    border: #ffffff 3px solid;
+    border:#fff solid 3px;
 }
 
 
@@ -73,7 +73,7 @@ header a:hover{
 /* Showcase */
 #showcase{
     min-height:400px;
-    background:url('../img/Pina.jpg')no-repeat 0 -100px;
+    background:url('../img/Pina.jpg')no-repeat 0 +100px;
     background-size:cover;
     text-align: center;
     color:#ffffff;
@@ -108,16 +108,23 @@ header a:hover{
 }
 
 #boxes .box img{
-    width:90px;
+    width:30px;
+    border:#13af15 solid 3px;
+    
 }
 
 /* Sidebar */
 aside#sidebar{
     float:right; 
     width: 30%;
-    
+    margin-top: 10px;
 }
 
+aside#sidebar .quote input, aside#sidebar .quote textarea{
+    width:90%;
+    padding:5px;
+}
+    
 /* Main-col */
 article#main-col{
     float: left;
@@ -127,12 +134,11 @@ article#main-col{
 /* Services */
 ul#services li{
     list-style:none;
-    padding:20=\px;
+    padding:20px;
     border:#13af15 solid 3px;
     margin-bottom:5px;
     background:#ffffff;
 }
-
 
 
 footer{
@@ -141,8 +147,30 @@ footer{
     color:#ffffff;
     background-color:#13af15;
     text-align:center;
-    border: #ffffff 7px solid;
-    
+    border-top: #ffffff 7px solid;
 }
 
+/*Media Queries */
+@media(max-width:768px){
+   header #branding,
+   header nav,
+   header nav li,
+   #newsletter h1,
+   #newsletter form,
+   #boxes .box{
+       float:none;
+       test-align:center;
+       width:100%;
+   }
+   header{
+       padding-bottom:20px;
+   }
+   
+   #showcase h1{
+       margin-top:40px;
+   }
+   
+   #
+   
+}
   
