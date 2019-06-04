@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="proc.js"></script>
+</head>
+<body>
+
+
+<script type="text/processing">
+PImage bg; PImage bgR; PImage alien; PImage ast;
+int numAst=7; 
+int[] ax = new int[numAst]; int[] ay = new int[numAst]; int count;
+int score=0; int fx; int fy; int highScore;
+int x;
+int y;
+int cx;
+int cy;
+int Vy;
+int gameState;
+
+//76 by 88
+
+void setup(){
+  gameState=0;
+  size(1000,500);
+  bg=loadImage("./images/spaaaace.png");
+  bgR=loadImage("./images/spaaace.jpg");
+  alien=loadImage("./images/ALEIN.png");
+  ast=loadImage("./images/asteroid.png");
+}
+
+void draw(){
+    if(score > highScore){
+        highScore = score;
+    }
+  if (gameState==0){
+  image(bg, x,0);
+  image(bgR,x+ bg.width,0);
+  image(bg, x+2*bg.width,0);
+  if(x < -(2*bg.width)){
+    x=0;
+  }
+  //Asteroid code
+ for(int i = 0; i<numAst ; i++){
+    ax[i]-= 2;
+    if(ax[i] < -10){
+      score++;
+      ax[i] = width + (int)random(50, 200);
+      ay[i] = height/2 + (int)random(-200,200);
+    }
+    if(abs((int)((fx+10)-(ax[i]+5))) < 10 && abs((int)((fy+10) - (ay[i]+32))) < 56){
+      ax[i]+=2000;
+      fx = width +20000;
+      score++;
+    }
+    if(abs((int)((cx+35)-(ax[i]+7))) < 22 && abs((int)((cy+34) - (ay[i]+41))) < 74){
+      gameState=1;
+    }
+    image(ast, ax[i], ay[i]);
+ }
+
+  image(alien,cx,cy);
+  cx= 50;
+  cy= cy+ Vy;
+  x--;
+  Vy++;
+  acc();
+  check();
+  sb();
+ 
+
+  
+  if (gameState==1){
+    sucky();
+    if(mouseX > 400 && mouseY > 250 && mouseX < 600 && mouseY < 205){
+      if (mousePressed){
+        cy = 100;
+        Vy = 2;
+        cx = 50;
+        score = 0;
+        for(int i =0; i < numAst ; i++){
+          ax[i] = width + (int)random(50, 200) + 200*i;
+          ay[i] = height/2 + (int)random(-200,200);
+        }
+       gameState=0;  
+      }
+    }
+  }
+  }
+}
+//speeeeeeed
+void acc(){
+  if (mousePressed){
+    Vy=-5;
+  }
+}
+
+
+//scorebooooard
+void sb(){
+  fill(255);
+  textSize(18);
+  text("Score: " + score, width -130, 30);
+  text("High Score: " + highScore, width - 130, 50);
+}
+
+void sucky(){
+    textSize(34);   //SIZE OF TEXT
+    rect(400,205, 240, 45, 10);  //BACKGROUND OF BUTTON
+    fill(255);
+    text("You Suck", 445,200);
+    fill(0);
+    text("Restart?", 455,240);
+    fill(255);
+}
+//we dead?????
+void check(){
+  if (cy > height || cy < -60){
+    gameState=1;
+  }
+
+}
+</script>
+
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
