@@ -8,10 +8,13 @@
 
 
 <script type="text/processing">
-PImage bg; PImage bgR; PImage alien; PImage ast;
+/*Code By Clare Groninger
+*Period 1
+*/
+PImage bg; PImage bgR; PImage alien; PImage ast; 
 int numAst=7; 
 int[] ax = new int[numAst]; int[] ay = new int[numAst]; int count;
-int score=0; int fx; int fy; int highScore;
+int score=0; int fx; int fy; int highScore; int costume;
 int x;
 int y;
 int cx;
@@ -23,24 +26,30 @@ int gameState;
 
 void setup(){
   gameState=0;
-  size(1000,500);
-  bg=loadImage("./images/spaaaace.png");
-  bgR=loadImage("./images/spaaace.jpg");
+  size(1000,450);
+  bg=loadImage("./images/spaace.png");
+  bgR=loadImage("./images/spaace2.png");
   alien=loadImage("./images/ALEIN.png");
+  alien2 = loadImage("./img/ALEIN2.png");
   ast=loadImage("./images/asteroid.png");
+  Vy = 2;
+  cy = 0;
+  cx = 50;
 }
 
 void draw(){
-    if(score > highScore){
-        highScore = score;
-    }
+  if(score > highScore){
+      highScore = score;
+  }
   if (gameState==0){
   image(bg, x,0);
   image(bgR,x+ bg.width,0);
-  image(bg, x+2*bg.width,0);
-  if(x < -(2*bg.width)){
+  image(bg, x+2*bg.width, 0);
+  costume=alien
+  if(x < -(bg.width)){
     x=0;
   }
+  
   //Asteroid code
  for(int i = 0; i<numAst ; i++){
     ax[i]-= 2;
@@ -49,18 +58,18 @@ void draw(){
       ax[i] = width + (int)random(50, 200);
       ay[i] = height/2 + (int)random(-200,200);
     }
-    if(abs((int)((fx+10)-(ax[i]+5))) < 10 && abs((int)((fy+10) - (ay[i]+32))) < 56){
+    if(abs((int)((fx+10)-(ax[i]+5))) < 10 && abs((int)((fy+10) - (ay[i]+32))) < 20){
       ax[i]+=2000;
       fx = width +20000;
       score++;
     }
-    if(abs((int)((cx+35)-(ax[i]+7))) < 22 && abs((int)((cy+34) - (ay[i]+41))) < 74){
+    if(abs((int)((cx+35)-(ax[i]+7))) < 15 && abs((int)((cy+34) - (ay[i]+41))) < 60){
       gameState=1;
     }
     image(ast, ax[i], ay[i]);
  }
 
-  image(alien,cx,cy);
+  image(costume,cx,cy);
   cx= 50;
   cy= cy+ Vy;
   x--;
@@ -69,7 +78,25 @@ void draw(){
   check();
   sb();
  
+if(gameState==1){
 
+    //buttom
+    textSize(34);
+    fill(255);
+    text("You died!!!", 425,146);
+    rect(390,160, 240, 45, 10);  
+    fill(0);
+    
+    //restart?
+    if (mousePressed){
+        gameState=0;             
+      }
+
+    else{
+      textSize(24);
+      text("Click To Play Aagin", 410,195);  
+    }  
+  }
   
   if (gameState==1){
     sucky();
@@ -78,7 +105,7 @@ void draw(){
         cy = 100;
         Vy = 2;
         cx = 50;
-        score = 0;
+        score =-7;
         for(int i =0; i < numAst ; i++){
           ax[i] = width + (int)random(50, 200) + 200*i;
           ay[i] = height/2 + (int)random(-200,200);
@@ -92,35 +119,42 @@ void draw(){
 //speeeeeeed
 void acc(){
   if (mousePressed){
+    costume = alien2;
     Vy=-5;
+  }
+  else{
+    costume=alien;
   }
 }
 
 
 //scorebooooard
 void sb(){
+  if(score > highScore){
+        highScore = score;
+  }
   fill(255);
   textSize(18);
-  text("Score: " + score, width -130, 30);
-  text("High Score: " + highScore, width - 130, 50);
+  text("Score: " + round(score/6), width -130, 30);
+  text("High Score: " + round(highScore/6) , width - 130, 50);
 }
 
-void sucky(){
-    textSize(34);   //SIZE OF TEXT
-    rect(400,205, 240, 45, 10);  //BACKGROUND OF BUTTON
-    fill(255);
-    text("You Suck", 445,200);
-    fill(0);
-    text("Restart?", 455,240);
-    fill(255);
-}
+
 //we dead?????
 void check(){
-  if (cy > height || cy < -60){
+  if (cy > height -70 || cy < -60){
+    gameState=1;
+  }
+  if (cy > height -70 || cy < -60){
     gameState=1;
   }
 
 }
+
+
+
+
+
 </script>
 
 <canvas id="sketch" style="border: 1px solid black;"></canvas>

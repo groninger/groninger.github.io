@@ -1,0 +1,241 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="proc.js"></script>
+</head>
+<body>
+
+
+<script type="text/processing">
+int x; 
+int cx; 
+int cy; 
+int cVy;
+int numAst = 7;
+int gameState; PImage knife; int[] ax = new int[numAst]; int[] ay = new int[numAst]; int count;
+PImage bg; PImage bgR; PImage alien; PImage ast;
+int score; int highScore;
+PImage laser; int fx; int fy;
+PImage back2; int laserCount; int bulletCount;
+boolean isShooting; boolean bull;
+PImage ast; int gx; int gy;
+
+
+void setup(){
+  isShooting = true;
+  bull = false;
+  gameState = -1;
+  font2 = createFont("Times New Roman", 18);
+  size(800,600);
+  bg = loadImage("./img/spaace.png");
+  bgR = loadImage("./img/spaace2.png");
+  alien = loadImage("./img/ALEIN.png");
+  alien2 = loadImage("./img/ALEIN2.png");
+  costume = alien;
+  ast = loadImage("./img/asteroid.png");
+  laser = loadImage("./img/redlaser.png");
+  back2 = loadImage("./img/spaace3.png")
+  cVy = 2;
+  cy = 100;
+  cx = 50;
+  fx = width + 10000;
+  bx = width + 200;
+  by = (int)random(200,600);
+  for(int i =0; i < numAst ; i++){
+    ax[i] = width + (int)random(50, 200) + 200*i;
+    ay[i] = height/2 + (int)random(-200,200);
+  }
+  
+}
+
+
+void draw(){
+
+  count++;
+  move();
+  if(score > highScore){
+        highScore = score;
+  }
+  if(gameState==0){
+  //Background goes on top!  (first!)
+  image(bg, x, 0);
+  image(bgR, x+bg.width-6, 0);
+  image(bg, x+2*bg.width -12, 0);
+  if(x < -(2*bg.width+12)){
+    x=0;
+  } 
+
+  //KNIFE CODE!!
+  for(int i = 0; i<numAst ; i++){
+    ax[i]-= 2;
+    if(ax[i] < -10){
+      score++;
+      ax[i] = width + (int)random(50, 200);
+      ay[i] = height/2 + (int)random(-200,200);
+    }
+    if(abs((int)((fx+10)-(ax[i]+5))) < 10 && abs((int)((fy+10) - (ay[i]+32))) < 56){
+      ax[i]+=2000;
+      fx = width +20000;
+      score++;
+    }
+    if(abs((int)((cx+35)-(ax[i]+7))) < 22 && abs((int)((cy+34) - (ay[i]+41))) < 74){
+      gameState=1;
+    }
+    image(ast, ax[i], ay[i]);
+    
+    
+  }
+  
+  //CAT CODE!!!
+  image(costume, cx,cy);
+  cy = cy + cVy;
+  if(count%2 ==0){
+    cVy ++;
+  }
+  x--;
+  checkAlien();
+  
+  //FIREBALL CODE
+  image(laser, fx, fy);
+  fx += 10;
+  if(abs((int)((fx+10)-(bx+75))) < 80 && abs((int)((fy+10) - (by+52))) < 86){
+      bx+=2000;  
+      fx =20000;
+      if(bulletCount==0){
+        bull = true;
+      }
+      if(bulletCount>0){
+        bull = false; 
+      }
+      bulletCount++;
+      
+  }
+  if(fx > width + 20){
+    fx = 20000;
+  } 
+ //END GAMESTATE 0 
+ }
+
+  //Mario Dies:
+  if(gameState==1){
+
+    //BEGIN BUTTON
+    textSize(34);   //SIZE OF TEXT
+    text("You died!!!", 100,146);
+    fill(245); 
+    rect(90,160, 240, 45, 10);  //BACKGROUND OF BUTTON
+    fill(0);
+    //END BUTTON
+    
+    //RESTART GAME
+    if(mouseX > 90 && mouseY > 160 && mouseX < 330 && mouseY < 205){
+      if (mousePressed){
+        cy = 100;
+        cVy = 2;
+        cx = 50;
+        score = 0;
+        fx = width + 10000;
+        bx = width + 200;
+        by = (int)random(200,600);       
+        for(int i =0; i < numAst ; i++){
+          kx[i] = width + (int)random(50, 200) + 200*i;
+          ky[i] = height/2 + (int)random(-200,200);
+        }
+        gameState=0;             
+      }
+ 
+      else{  //HOVER OVER BUT NOT CLICK
+        fill(255,0,0);
+        rect(90,160, 240, 45, 10);
+        fill(0);
+        text("Play Again?", 100,196);  //TEXT ON BUTTON
+      }
+    }
+    else{
+      text("Click Me!!", 100,196);  //TEXT ON BUTTON
+    }  
+  }
+  
+  //TEXT TO SCREEN
+  fill(0);
+  textSize(18);
+  text("Score: " + score, width -130, 30);
+  text("High Score: " + highScore, width - 130, 50);
+ 
+  
+  //START SCREEN
+  if(gameState == -1){
+    image(back2,0,0);
+    fill(0,0,0, 151);
+    textSize(24);
+    textFont(font1);
+    text("*Click to play!", 50, 40);
+    if(mousePressed ){
+      gameState = 0;
+    }   
+
+    textFont(font2);
+    text("MOVE:  LEFT/RIGHT ARROW", 15, 145);
+    text("FIRE:     DOWN ARROW", 15, 170);
+    text("FLAP:     CLICK MOUSE", 15, 195); 
+    
+    fill(0,0,0, 255);
+    textFont(bold);
+    text("SPACEY RACEY", 25, 115);
+    noFill();
+    rect(10, 125, 262,75, 5);
+  }
+  
+}
+//END DRAW
+
+
+void move(){
+  if (keyPressed){    
+    if(cx > 0 && keyCode==LEFT){
+      cx-=2;
+    }
+    else if(cx <width/2 && keyCode==RIGHT){
+      cx+=2;
+    }
+  }
+
+}
+void keyReleased() {
+   if(keyCode==DOWN){
+     marioFire();
+   }
+}
+
+void mousePressed(){
+  cVy = -11; 
+  costume = alien2;
+}
+
+void mouseReleased(){
+  costume = alien; 
+}
+void alienFire(){
+  fx = cx + 20;
+  fy = cy + 45;
+ laserCount++;
+  if(laserCount > 4){
+    isShooting = true;
+  }
+  else{
+    isShooting = false;
+  }
+}
+void checkAlien(){
+  if(cy > height || cy < -80){
+    gameState =1;
+  }
+}
+
+
+</script>
+
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
